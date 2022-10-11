@@ -1,7 +1,6 @@
 import json
-
+import os
 from file_utils import get_current_path, mkdir
-
 
 def setup_env(self):
     path_to_env = get_current_path()
@@ -19,3 +18,8 @@ def setup_env(self):
     self.screenshot_interval = self.env_vars["SCREENSHOT_INTERVAL"]
     mkdir(self.log_path)
     mkdir(self.screenshot_path)
+
+    folder = os.getcwd().replace('\\','/')
+    bat_file = 'start /b pythonw.exe "{}\main.py"'.format(folder.replace("/","\\"))
+    with open(f"{folder}/open.bat", "w") as f:
+        print(bat_file, file=f)
