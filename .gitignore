@@ -1,1 +1,6 @@
 env_vars.json
+**__pycache__
+log
+.vscode
+screenshots
+**.bat
