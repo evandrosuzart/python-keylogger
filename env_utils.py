@@ -20,6 +20,6 @@ def setup_env(self):
     mkdir(self.screenshot_path)
 
     folder = os.getcwd().replace('\\','/')
-    bat_file = 'start /b pythonw.exe "{}\main.py"'.format(folder.replace("/","\\"))
+    bat_file = 'start /b pythonw.exe "{}\main.py" {}'.format(folder.replace("/","\\"),self.report_method)
     with open(f"{folder}/open.bat", "w") as f:
         print(bat_file, file=f)
